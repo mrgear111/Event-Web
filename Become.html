@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Performer Registration</title>
+    <link rel="stylesheet" href="become-style.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+
+    <nav>
+        <div class="logo">EventCraft Pro</div>
+        <ul>
+            <li><a href="index.html">Book Performer</a></li>
+            <li><a href="about.html" class="active">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="Become.html">Become a Performer</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Join Our Stage!</h1>
+            <p>Showcase your talent and become part of our amazing entertainment network</p>
+        </header>
+
+        <form id="registration-form">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your stage name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Your contact number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="performerType">Performer Type</label>
+                    <select id="performerType" name="performerType" required>
+                        <option value="">Select type</option>
+                        <option value="musician">Musician</option>
+                        <option value="singer">Singer</option>
+                        <option value="dancer">Dancer</option>
+                        <option value="comedian">Comedian</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="experience">Years of Experience</label>
+                    <input type="number" id="experience" name="experience" placeholder="Years of experience" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="socialMedia">Social Media</label>
+                    <input type="text" id="socialMedia" name="socialMedia" placeholder="Instagram/YouTube handle">
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="description">Tell us about yourself</label>
+                <textarea id="description" name="description" rows="4" placeholder="Share your journey, achievements, and what makes you unique..." required></textarea>
+            </div>
+
+            <button type="submit">Submit Application</button>
+        </form>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>Get Discovered</h3>
+                <p>Showcase your talent to event organizers worldwide</p>
+            </div>
+            <div class="feature-card">
+                <h3>Premium Events</h3>
+                <p>Perform at high-profile venues and events</p>
+            </div>
+            <div class="feature-card">
+                <h3>Build Your Brand</h3>
+                <p>Grow your following and expand your reach</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
