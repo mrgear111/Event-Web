@@ -5,13 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Performer Registration</title>
     <link rel="stylesheet" href="become-style.css">
- 
-
 </head>
 <body>
-
-
-
     <nav>
         <div class="logo">EventCraft Pro</div>
         <ul>
@@ -19,11 +14,8 @@
             <li><a href="about.html">About Us</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="Become.html">Become a Performer</a></li>
-
         </ul>
     </nav>
-
-
 
     <div class="hero">
         <div class="hero-content">
@@ -33,7 +25,9 @@
     </div>
 
     <div class="container">
-        <form id="registration-form">
+        <!-- Updated form with Netlify integration -->
+        <form id="registration-form" name="performer-registration" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="performer-registration">
             <div class="form-grid">
                 <div class="form-group">
                     <label for="name">Stage Name</label>
