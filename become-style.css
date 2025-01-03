@@ -241,11 +241,11 @@ nav ul li a {
     transition: color 0.3s;
 }
 
-nav ul li a:hover,
+/* nav ul li a:hover,
 nav ul li a.active {
     color: #ffd700;
-}
+} */
 
 .neww:visited {
-    color: #ffd700; /* Changes the color to yellow after the link is clicked */
+    color: #ffd700; 
 }
