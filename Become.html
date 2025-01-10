@@ -40,6 +40,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="realName">Legal Name</label>
+                    <input type="text" id="realName" name="realName" placeholder="Your legal name" required>
+                </div>
+
+                <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="your@email.com" required>
                 </div>
@@ -50,6 +55,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" placeholder="City, State" required>
+                </div>
+
+                <div class="form-group">
                     <label for="performerType">Performer Type</label>
                     <select id="performerType" name="performerType" required onchange="toggleOtherField()">
                         <option value="">Select type</option>
@@ -57,6 +67,9 @@
                         <option value="singer">Singer</option>
                         <option value="dancer">Dancer</option>
                         <option value="comedian">Comedian</option>
+                        <option value="magician">Magician</option>
+                        <option value="dj">DJ</option>
+                        <option value="band">Band</option>
                         <option value="other">Other</option>
                     </select>
                 </div>
@@ -68,13 +81,46 @@
 
                 <div class="form-group">
                     <label for="experience">Years of Experience</label>
-                    <input type="number" id="experience" name="experience" placeholder="Years of experience" required>
+                    <input type="number" id="experience" name="experience" placeholder="Years of experience" required min="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="rate">Hourly Rate (₹)</label>
+                    <input type="number" id="rate" name="rate" placeholder="Your hourly rate" required min="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="availability">Primary Availability</label>
+                    <select id="availability" name="availability" required>
+                        <option value="">Select availability</option>
+                        <option value="weekdays">Weekdays</option>
+                        <option value="weekends">Weekends</option>
+                        <option value="evenings">Evenings</option>
+                        <option value="late-nights">Late Nights</option>
+                        <option value="all">All Time</option>
+                        <option value="flexible">Flexible</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="travelDistance">Maximum Travel Distance (km)</label>
+                    <input type="number" id="travelDistance" name="travelDistance" placeholder="Distance willing to travel" required min="0">
                 </div>
 
                 <div class="form-group">
                     <label for="socialMedia">Social Media</label>
                     <input type="text" id="socialMedia" name="socialMedia" placeholder="Instagram/YouTube handle">
                 </div>
+
+                <div class="form-group">
+                    <label for="portfolio">Portfolio Link</label>
+                    <input type="url" id="portfolio" name="portfolio" placeholder="Link to your work">
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="equipment">Equipment/Requirements</label>
+                <textarea id="equipment" name="equipment" rows="3" placeholder="List any equipment you provide or require for performances"></textarea>
             </div>
 
             <div class="form-group full-width">
@@ -82,7 +128,15 @@
                 <textarea id="description" name="description" rows="4" placeholder="Share your journey, achievements, and what makes you unique..." required></textarea>
             </div>
 
-            <button type="submit">Submit Application</button>
+            <div class="form-group full-width">
+                <label for="previousWork">Previous Work/Performance Links</label>
+                <textarea id="previousWork" name="previousWork" rows="3" 
+                    placeholder="Share links to your previous performances, YouTube videos, or any other relevant work (One link per line)"></textarea>
+            </div>
+
+            <div class="submit-container">
+                <button type="submit">Submit Application</button>
+            </div>
         </form>
 
         <div class="features">
