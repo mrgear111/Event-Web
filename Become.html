@@ -109,8 +109,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="rate">Hourly Rate (₹)</label>
-                    <input type="number" id="rate" name="rate" placeholder="Your hourly rate" required min="0">
+                    <label for="rate">
+                        Hourly Rate (₹)
+                        <span class="required-tag">Required</span>
+                    </label>
+                    <input type="number" id="rate" name="rate" placeholder="Your base rate per hour" required min="500" max="50000">
                 </div>
 
                 <div class="form-group">
@@ -124,11 +127,6 @@
                         <option value="all">All Time</option>
                         <option value="flexible">Flexible</option>
                     </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="travelDistance">Maximum Travel Distance (km)</label>
-                    <input type="number" id="travelDistance" name="travelDistance" placeholder="Distance willing to travel" required min="0">
                 </div>
 
                 <div class="form-group">

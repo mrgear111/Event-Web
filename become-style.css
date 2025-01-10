@@ -471,3 +471,64 @@ select {
     background-size: 20px;
     padding-right: 40px;
 }
+
+/* Fix dropdown styling */
+.form-group select {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+}
+
+/* Style dropdown options */
+.form-group select option {
+    background-color: #1a0f2e;
+    color: white;
+    padding: 12px;
+}
+
+/* Style dropdown hover state */
+.form-group select:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(139, 92, 246, 0.5);
+}
+
+/* Style the rate input */
+input[type="number"]#rate {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* Add currency symbol */
+.form-group.rate-group {
+    position: relative;
+}
+
+.form-group.rate-group::before {
+    content: "₹";
+    position: absolute;
+    left: 10px;
+    top: 38px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.form-group.rate-group input {
+    padding-left: 25px;
+}
+
+/* Style placeholder text */
+.form-group select::placeholder,
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Remove spinner buttons from number input */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
