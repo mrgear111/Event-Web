@@ -244,47 +244,45 @@ button[type="submit"].loading::after {
 
 
 nav {
-    background: rgba(0, 0, 0, 0.8);
-    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .logo {
-    color: #fff;
     font-size: 1.5rem;
     font-weight: bold;
+    color: white;
 }
 
 .nav-links {
     display: flex;
     list-style: none;
-    margin: 0;
-    padding: 0;
+    gap: 2rem;
 }
 
-.nav-links li a {
-    color: #fff;
+.nav-links a {
+    color: white;
     text-decoration: none;
-    padding: 0.5rem 1rem;
-    margin: 0 0.5rem;
+    font-weight: 500;
     transition: color 0.3s;
 }
 
-.nav-links li a:hover,
-.nav-links li a.active {
-    color: #ffd700;
+.nav-links a:hover,
+.nav-links a.active {
+    color: #8b5cf6;
 }
 
 .hamburger {
     display: none;
     cursor: pointer;
-    padding: 10px;
 }
 
 .hamburger span {
@@ -299,7 +297,7 @@ nav {
 @media (max-width: 768px) {
     .hamburger {
         display: block;
-        z-index: 1001;
+        z-index: 100;
     }
 
     .nav-links {
@@ -308,19 +306,22 @@ nav {
         right: -100%;
         height: 100vh;
         width: 100%;
-        background: rgba(0, 0, 0, 0.9);
+        background: rgba(0, 0, 0, 0.95);
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        transition: right 0.3s ease;
+        transition: 0.3s;
+        z-index: 99;
     }
 
     .nav-links.active {
         right: 0;
     }
 
-    nav ul li {
-        margin: 20px 0;
+    .nav-links a {
+        color: white;
+        font-size: 1.2rem;
+        margin: 1rem 0;
     }
 
     .hamburger.active span:nth-child(1) {
@@ -333,14 +334,6 @@ nav {
 
     .hamburger.active span:nth-child(3) {
         transform: rotate(-45deg) translate(7px, -6px);
-    }
-
-    .nav-links li {
-        margin: 15px 0;
-    }
-
-    .nav-links li a {
-        font-size: 1.2rem;
     }
 }
 

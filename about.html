@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EventCraft Pro - About Us</title>
-    <link rel="stylesheet" href="style.css">
+    <title>About Us - EventCraft Pro</title>
+    <link rel="stylesheet" href="about.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body style="background-color: rgb(216, 232, 234);">
+<body>
     <nav>
         <div class="logo">EventCraft Pro</div>
         <div class="hamburger">
@@ -22,40 +23,86 @@
         </ul>
     </nav>
 
-    <section class="about-section">
-        <h1>About Us</h1>
-        <div class="founders">
-            <div class="founder-card">
-                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7" alt="Mudit">
-                <h2>Mudit</h2>
-                <p>Co-Founder & Creative Director</p>
-                <p>With a passion for creating memorable experiences, Mudit brings creativity and innovation to every event.</p>
+    <div class="container">
+        <div class="about-wrapper">
+            <div class="about-header">
+                <h1>About EventCraft Pro</h1>
+                <p>Crafting Unforgettable Experiences, One Event at a Time</p>
             </div>
 
-            <div class="founder-card">
-                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="Daksh">
-                <h2>Daksh</h2>
-                <p>Co-Founder & Operations Director</p>
-                <p>Daksh ensures flawless execution of events with his expertise in event management and logistics.</p>
-            </div>
+            <div class="about-content">
+                <div class="mission-section">
+                    <div class="icon-box">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h2>Our Mission</h2>
+                    <p>To transform ordinary events into extraordinary experiences by connecting talented performers with event organizers, making every moment memorable.</p>
+                </div>
 
-            <div class="founder-card">
-                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80" alt="Shubhangi">
-                <h2>Shubhangi</h2>
-                <p>Creative Head & Event Designer</p>
-                <p>Shubhangi brings her artistic vision and attention to detail to create stunning event designs and experiences.</p>
+                <div class="values-section">
+                    <h2>Our Core Values</h2>
+                    <div class="values-grid">
+                        <div class="value-card">
+                            <i class="fas fa-heart"></i>
+                            <h3>Passion</h3>
+                            <p>We're passionate about creating magical moments through entertainment.</p>
+                        </div>
+                        <div class="value-card">
+                            <i class="fas fa-handshake"></i>
+                            <h3>Trust</h3>
+                            <p>Building lasting relationships through reliability and transparency.</p>
+                        </div>
+                        <div class="value-card">
+                            <i class="fas fa-gem"></i>
+                            <h3>Excellence</h3>
+                            <p>Committed to delivering the highest quality entertainment solutions.</p>
+                        </div>
+                        <div class="value-card">
+                            <i class="fas fa-users"></i>
+                            <h3>Community</h3>
+                            <p>Fostering a supportive network of performers and event organizers.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-section">
+                    <h2>Our Team</h2>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="https://this-person-does-not-exist.com/img/avatar-gen11a4f8d244248e4c4e3d7003d4c32b1c.jpg" alt="Mudit Choudhary">
+                            </div>
+                            <h3>Mudit Choudhary</h3>
+                            <p>Co-founder & CEO</p>
+                            <div class="social-links">
+                                <a href="https://www.linkedin.com/in/mudit-choudhary-b62a84257/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="https://this-person-does-not-exist.com/img/avatar-gen119761a3f7ba19242c5c7eed2b180d86.jpg" alt="Daksh Saini">
+                            </div>
+                            <h3>Daksh Saini</h3>
+                            <p>Co-founder & CTO</p>
+                            <div class="social-links">
+                                <a href="https://www.linkedin.com/in/daksh-saini-1b1630257/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="https://this-person-does-not-exist.com/img/avatar-gen11782e0df6c81c2c59f90aad2b6f5cc1.jpg" alt="Shubhangi Choudhary">
+                            </div>
+                            <h3>Shubhangi Choudhary</h3>
+                            <p>Co-founder & Creative Director</p>
+                            <div class="social-links">
+                                <a href="https://www.linkedin.com/in/shubhangi-choudhary-b62a84257/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="story">
-            <h2>Our Story</h2>
-            <p>Founded in 2024, EventCraft Pro was born from a shared vision of transforming ordinary events into extraordinary experiences. Mudit, Daksh, and Shubhangi combined their expertise in event planning, performer management, and creative design to create a one-stop solution for all event needs.</p>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 EventCraft Pro. All rights reserved.</p>
-    </footer>
+    </div>
 
     <script>
         const hamburger = document.querySelector('.hamburger');
@@ -66,7 +113,6 @@
             navLinks.classList.toggle('active');
         });
 
-        // Close menu when clicking a link
         document.querySelectorAll('.nav-links li a').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
