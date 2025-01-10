@@ -35,22 +35,34 @@
             <input type="hidden" name="form-name" value="performer-registration">
             <div class="form-grid">
                 <div class="form-group">
-                    <label for="name">Stage Name</label>
+                    <label for="name">
+                        Stage Name
+                        <span class="required-tag">Required</span>
+                    </label>
                     <input type="text" id="name" name="name" placeholder="Your stage name" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="realName">Legal Name</label>
+                    <label for="realName">
+                        Legal Name
+                        <span class="required-tag">Required</span>
+                    </label>
                     <input type="text" id="realName" name="realName" placeholder="Your legal name" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email">
+                        Email
+                        <span class="required-tag">Required</span>
+                    </label>
                     <input type="email" id="email" name="email" placeholder="your@email.com" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="phone">Phone</label>
+                    <label for="phone">
+                        Phone Number
+                        <span class="required-tag">Required</span>
+                    </label>
                     <input type="tel" id="phone" name="phone" placeholder="Your contact number" required>
                 </div>
 
@@ -60,7 +72,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="performerType">Performer Type</label>
+                    <label for="performerType">
+                        Performer Type
+                        <span class="required-tag">Required</span>
+                    </label>
                     <select id="performerType" name="performerType" required onchange="toggleOtherField()">
                         <option value="">Select type</option>
                         <option value="musician">Musician</option>
@@ -80,8 +95,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="experience">Years of Experience</label>
-                    <input type="number" id="experience" name="experience" placeholder="Years of experience" required min="0">
+                    <label for="experience">
+                        Experience Level
+                        <span class="required-tag">Required</span>
+                    </label>
+                    <select id="experience" name="experience" required>
+                        <option value="">Select your experience level</option>
+                        <option value="beginner">Beginner (0-2 years)</option>
+                        <option value="intermediate">Intermediate (2-5 years)</option>
+                        <option value="advanced">Advanced (5+ years)</option>
+                        <option value="professional">Professional</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -108,7 +132,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="socialMedia">Social Media</label>
+                    <label for="socialMedia">
+                        Social Media Links
+                        <span class="optional-tag">Optional</span>
+                    </label>
                     <input type="text" id="socialMedia" name="socialMedia" placeholder="Instagram/YouTube handle">
                 </div>
 
@@ -124,7 +151,10 @@
             </div>
 
             <div class="form-group full-width">
-                <label for="description">Tell us about yourself</label>
+                <label for="description">
+                    Performance Description
+                    <span class="required-tag">Required</span>
+                </label>
                 <textarea id="description" name="description" rows="4" placeholder="Share your journey, achievements, and what makes you unique..." required></textarea>
             </div>
 

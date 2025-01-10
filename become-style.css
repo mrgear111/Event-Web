@@ -63,22 +63,48 @@ label {
     font-size: 0.95rem;
 }
 
-input, select, textarea {
+/* Update form input and select styles */
+.form-group input,
+.form-group select,
+.form-group textarea {
     width: 100%;
-    padding: 1rem;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0.75rem;
-    background: rgba(255, 255, 255, 0.08);
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
     color: white;
-    font-size: 1rem;
     transition: all 0.3s ease;
 }
 
-input:focus, select:focus, textarea:focus {
-    border-color: #8b5cf6;
-    background: rgba(255, 255, 255, 0.12);
+/* Remove red outline and keep only blue focus style */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+/* Remove default red outline for required fields */
+.form-group input:required,
+.form-group select:required,
+.form-group textarea:required {
+    box-shadow: none;
+}
+
+/* Style for required tag */
+.required-tag {
+    font-size: 0.8rem;
+    color: #8b5cf6;
+    margin-left: 0.5rem;
+}
+
+/* Remove red border on invalid state */
+.form-group input:invalid,
+.form-group select:invalid,
+.form-group textarea:invalid {
+    box-shadow: none;
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 button {
@@ -406,4 +432,42 @@ textarea#previousWork {
 textarea#previousWork:focus {
     border-color: #8b5cf6;
     background: rgba(255, 255, 255, 0.12);
+}
+
+/* Remove red outline from select elements and lists */
+select,
+select:required,
+select:invalid,
+input[list],
+input[list]:required,
+input[list]:invalid {
+    box-shadow: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    outline: none;
+}
+
+/* Style for select focus state */
+select:focus,
+input[list]:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+/* Style for select hover state */
+select:hover,
+input[list]:hover {
+    border-color: rgba(139, 92, 246, 0.5);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Remove webkit default styling */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    padding-right: 40px;
 }
