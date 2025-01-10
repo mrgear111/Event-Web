@@ -1,32 +1,61 @@
-<nav>
-    <div class="logo">EventCraft Pro</div>
-    <div class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EventCraft</title>
+    <link rel="stylesheet" href="new.css">
+  </head>
+  <body>
+
+
+
+    <nav>
+      <div class="logo">EventCraft Pro</div>
+      <ul>
+          <li><a href="index.html" class="active">Book Performer</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="Become.html">Become a Performer</a></li>
+
+      </ul>
+    </nav>
+
+
+
+
+
+
+
+
+
+    <div id="app">
+      <header>
+        <h1>EventCraft</h1>
+        <p>Experience Unforgettable Moments</p>
+      </header>
+
+      <section class="featured-event">
+        <div class="event-details">
+          <h2>Book your Performer</h2>
+          <div class="event-info">
+          </div>
+          <p class="description">
+            Get ready for an electrifying event featuring world-class performers,
+            immersive art installations, and unforgettable experiences.
+          </p>
+          <!-- <div class="performers">
+            <div class="performer">
+              <div class="performer-image"></div>
+              <h3>Artist-1</h3>
+            </div> -->
+            <!-- <div class="performer">
+              <div class="performer-image second"></div>
+              <h3>Artist-2</h3>
+            </div>
+          </div> -->
+          <a href="contact.html"><button class="book-now">Book Now</button></a>
+        </div>
     </div>
-    <ul class="nav-links">
-        <li><a href="index.html" class="active">Book Performer</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="Become.html">Become a Performer</a></li>
-    </ul>
-</nav> 
-<script>
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-    });
-
-    // Close menu when clicking a link
-    document.querySelectorAll('.nav-links li a').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-        });
-    });
-</script>
-</body> 
+  </body>
+</html>
