@@ -10,11 +10,16 @@
 
 
     <nav>
-        <div class="logo">EventCraft</div>
-        <ul>
-            <li><a href="index.html" class="active">Book Performer</a></li>
+        <div class="logo">EventCraft Pro</div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Book Performer</a></li>
             <li><a href="about.html">About Us</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
             <li><a href="Become.html" class="neww">Become a Performer</a></li>
         </ul>
     </nav>
@@ -71,4 +76,35 @@
         </div>
     </div>
 </body>
+<script type="module">
+
+import {createClient} from "https://esm.sh/@supabase/supabase-js@2.32.0"
+
+const supabaseUrl = "https://zqhtvhfpujiqapfskkrf.supabase.co";
+const supabasekey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpxaHR2aGZwdWppcWFwZnNra3JmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY1MDE0NjAsImV4cCI6MjA1MjA3NzQ2MH0.wKWicYLgifBYhAZS1kTrBebjPwTCBstMdrOPsJwaSjk";
+
+const supabase = supabase.createClient(supabaseUrl,supabasekey);
+
+document.getElementById('login-form').addEventListener('submit')
+
+</script>
+
+<script>
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.nav-links li a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+</script>
+
 </html>

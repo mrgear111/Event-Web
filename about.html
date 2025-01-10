@@ -9,7 +9,12 @@
 <body style="background-color: rgb(216, 232, 234);">
     <nav>
         <div class="logo">EventCraft Pro</div>
-        <ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
             <li><a href="index.html">Book Performer</a></li>
             <li><a href="about.html" class="active">About Us</a></li>
             <li><a href="contact.html">Contact</a></li>
@@ -51,5 +56,23 @@
     <footer>
         <p>&copy; 2024 EventCraft Pro. All rights reserved.</p>
     </footer>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links li a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
