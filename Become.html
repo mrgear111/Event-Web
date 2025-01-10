@@ -51,7 +51,7 @@
 
                 <div class="form-group">
                     <label for="performerType">Performer Type</label>
-                    <select id="performerType" name="performerType" required>
+                    <select id="performerType" name="performerType" required onchange="toggleOtherField()">
                         <option value="">Select type</option>
                         <option value="musician">Musician</option>
                         <option value="singer">Singer</option>
@@ -59,6 +59,11 @@
                         <option value="comedian">Comedian</option>
                         <option value="other">Other</option>
                     </select>
+                </div>
+
+                <div class="form-group" id="otherPerformerType" style="display: none;">
+                    <label for="otherType">Specify Performer Type</label>
+                    <input type="text" id="otherType" name="otherType" placeholder="Enter your performer type">
                 </div>
 
                 <div class="form-group">
@@ -112,6 +117,19 @@
                 navLinks.classList.remove('active');
             });
         });
+
+        function toggleOtherField() {
+            const performerType = document.getElementById('performerType');
+            const otherField = document.getElementById('otherPerformerType');
+            
+            if (performerType.value === 'other') {
+                otherField.style.display = 'block';
+                document.getElementById('otherType').required = true;
+            } else {
+                otherField.style.display = 'none';
+                document.getElementById('otherType').required = false;
+            }
+        }
     </script>
 </body>
 </html>
