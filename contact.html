@@ -3,59 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EventCraft Pro - Contact Us</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Contact Us - Event Planner</title>
+    <link rel="stylesheet" href="contact.css">
 </head>
 <body>
-    <nav>
-        <div class="logo">EventCraft Pro</div>
-        <ul>
-            <li><a href="index.html">Book Performer</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="contact.html" class="active">Contact</a></li>
-            <li><a href="Become.html">Become a Performer</a></li>
-        </ul>
-    </nav>
-
-    <section class="contact-section">
-        <h1>Get in Touch</h1>
-        
-        <div class="contact-container">
-            <div class="contact-info">
-                <h2>Contact Information</h2>
-                <div class="info-item">
+    <div class="container">
+        <div class="contact-box">
+            <h1>Contact Us</h1>
+            <p class="tagline">Let's make your event extraordinary!</p>
+            
+            <form class="contact-form">
+                <div class="input-group">
+                    <input type="text" required>
+                    <label>Your Name</label>
                 </div>
-                <div class="info-item">
-                    <h3>Email</h3>
-                    <p>info@eventcraftpro.com</p>
+                
+                <div class="input-group">
+                    <input type="email" required>
+                    <label>Email Address</label>
                 </div>
-            </div>
-
-            <!-- <form class="contact-form">
-                <h2>Send us a Message</h2>
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <input type="text" placeholder="Subject" required>
-                <textarea placeholder="Your Message" required></textarea>
-                <button type="submit">Send Message</button>
-            </form> -->
-
-
-            <form class="contact-form" name="contact" method="POST" data-netlify="true">
-                <h2>Send us a Message</h2>
-                <input type="hidden" name="form-name" value="contact">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <input type="text" name="subject" placeholder="Subject" required>
-                <textarea name="message" placeholder="Your Message" required></textarea>
+                
+                <div class="input-group">
+                    <input type="tel" required>
+                    <label>Phone Number</label>
+                </div>
+                
+                <div class="input-group">
+                    <textarea required></textarea>
+                    <label>Your Message</label>
+                </div>
+                
                 <button type="submit">Send Message</button>
             </form>
             
+            <div class="contact-info">
+                <div class="info-item">
+                    <span class="icon">📍</span>
+                    <p>123 Event Street, Party City, PC 12345</p>
+                </div>
+                <div class="info-item">
+                    <span class="icon">📞</span>
+                    <p>+1 (555) 123-4567</p>
+                </div>
+                <div class="info-item">
+                    <span class="icon">✉️</span>
+                    <p>contact@eventplanner.com</p>
+                </div>
+            </div>
         </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 EventCraft Pro. All rights reserved.</p>
-    </footer>
+    </div>
 </body>
 </html>
