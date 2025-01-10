@@ -112,6 +112,12 @@
                         </select>
                         <span class="focus-border"></span>
                     </div>
+
+                    <div class="form-group" id="otherPerformerType" style="display: none;">
+                        <input type="text" id="otherType" name="otherType" placeholder=" ">
+                        <label for="otherType">Specify Performer Type</label>
+                        <span class="focus-border"></span>
+                    </div>
                 </div>
 
                 <div class="form-group full-width">
@@ -156,6 +162,18 @@
                 hamburger.classList.remove('active');
                 navLinks.classList.remove('active');
             });
+        });
+
+        // Add performer type toggle functionality
+        document.getElementById('performerType').addEventListener('change', function() {
+            const otherField = document.getElementById('otherPerformerType');
+            if (this.value === 'other') {
+                otherField.style.display = 'block';
+                document.getElementById('otherType').required = true;
+            } else {
+                otherField.style.display = 'none';
+                document.getElementById('otherType').required = false;
+            }
         });
     </script>
 </body>
