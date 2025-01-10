@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Event Planner</title>
+    <title>Contact Us - EventCraft Pro</title>
     <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+
+
 
 
     <nav>
@@ -20,91 +23,180 @@
             <li><a href="index.html">Book Performer</a></li>
             <li><a href="about.html">About Us</a></li>
             <li><a href="contact.html" class="active">Contact</a></li>
-            <li><a href="Become.html" class="neww">Become a Performer</a></li>
+            <li><a href="Become.html">Become a Performer</a></li>
         </ul>
     </nav>
 
-
-
-
-
-
-
     <div class="container">
-        <div class="contact-box">
-            <h1>Contact Us</h1>
-            <p class="tagline">Let's make your event extraordinary!</p>
-            
-            <form class="contact-form">
-                <div class="input-group">
-                    <input type="text" required>
-                    <label>Your Name</label>
-                </div>
-                
-                <div class="input-group">
-                    <input type="email" required>
-                    <label>Email Address</label>
-                </div>
-                
-                <div class="input-group">
-                    <input type="tel" required>
-                    <label>Phone Number</label>
-                </div>
-                
-                <div class="input-group">
-                    <textarea required></textarea>
-                    <label>Your Message</label>
-                </div>
-                
-                <button type="submit">Send Message</button>
-            </form>
-            
+        <div class="contact-wrapper">
             <div class="contact-info">
-                <!-- <div class="info-item">
-                    <span class="icon">📍</span>
-                    <p>123 Event Street, Party City, PC 12345</p>
-                </div> -->
-                <div class="info-item">
-                    <span class="icon">📞</span>
-                    <p>+91 8955388304  & +91 9672467580</p>
-                </div>
-                <div class="info-item">
-                    <span class="icon">✉️</span>
-                    <p>mrgear111@gmail.com , mudit292005@gmail.com</p>
+                <h2>Get in Touch</h2>
+                <p class="info-desc">We're here to help plan your perfect event!</p>
+                
+                <div class="info-items">
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h3>Call Us</h3>
+                            <p>+91 8955388304</p>
+                            <p>+91 9672467580</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email Us</h3>
+                            <p>mrgear111@gmail.com</p>
+                            <p>mudit292005@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h3>Working Hours</h3>
+                            <p>Mon - Sat: 9:00 AM - 8:00 PM</p>
+                            <p>Sunday: 10:00 AM - 4:00 PM</p>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <form class="contact-form" id="contact-form" name="contact" method="POST" data-netlify="true">
+                <h2>Book Your Event</h2>
+                <p class="form-desc">Fill out the form below and we'll get back to you within 24 hours.</p>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder=" " required>
+                        <label for="name">Your Name</label>
+                        <span class="focus-border"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder=" " required>
+                        <label for="email">Email Address</label>
+                        <span class="focus-border"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="tel" id="phone" name="phone" placeholder=" " required>
+                        <label for="phone">Phone Number</label>
+                        <span class="focus-border"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="date" id="eventDate" name="eventDate" required>
+                        <label for="eventDate" class="date-label">Event Date</label>
+                        <span class="focus-border"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <select id="eventType" name="eventType" required>
+                            <option value="">Select Event Type</option>
+                            <option value="wedding">Wedding</option>
+                            <option value="corporate">Corporate Event</option>
+                            <option value="birthday">Birthday Party</option>
+                            <option value="concert">Concert</option>
+                            <option value="festival">Festival</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <span class="focus-border"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <select id="performerType" name="performerType" required>
+                            <option value="">Select Performer Type</option>
+                            <option value="dj">DJ</option>
+                            <option value="band">Live Band</option>
+                            <option value="singer">Singer</option>
+                            <option value="dancer">Dancer</option>
+                            <option value="magician">Magician</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <textarea id="message" name="message" rows="4" placeholder=" " required></textarea>
+                    <label for="message">Tell us about your event</label>
+                    <span class="focus-border"></span>
+                </div>
+
+                <div class="form-footer">
+                    <button type="submit" class="submit-btn">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                    <p class="privacy-note">By submitting this form, you agree to our <a href="#">Privacy Policy</a></p>
+                </div>
+            </form>
         </div>
     </div>
-</body>
-<script type="module">
 
-import {createClient} from "https://esm.sh/@supabase/supabase-js@2.32.0"
+    <div class="form-status success">
+        <i class="fas fa-check-circle"></i>
+        <p>Message sent successfully!</p>
+    </div>
 
-const supabaseUrl = "https://zqhtvhfpujiqapfskkrf.supabase.co";
-const supabasekey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpxaHR2aGZwdWppcWFwZnNra3JmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY1MDE0NjAsImV4cCI6MjA1MjA3NzQ2MH0.wKWicYLgifBYhAZS1kTrBebjPwTCBstMdrOPsJwaSjk";
+    <div class="form-status error">
+        <i class="fas fa-times-circle"></i>
+        <p>Oops! Something went wrong.</p>
+    </div>
 
-const supabase = supabase.createClient(supabaseUrl,supabasekey);
+    <script>
+        // Hamburger menu functionality
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
 
-document.getElementById('login-form').addEventListener('submit')
-
-</script>
-
-<script>
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-    });
-
-    // Close menu when clicking a link
-    document.querySelectorAll('.nav-links li a').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
         });
-    });
-</script>
 
+        document.querySelectorAll('.nav-links li a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Form animation
+        document.querySelectorAll('.form-group input, .form-group textarea').forEach(element => {
+            element.addEventListener('focus', () => {
+                element.parentElement.classList.add('focused');
+            });
+            element.addEventListener('blur', () => {
+                if (!element.value) {
+                    element.parentElement.classList.remove('focused');
+                }
+            });
+        });
+
+        // Add form submission handling
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+            const submitBtn = form.querySelector('.submit-btn');
+            
+            // Add loading state
+            submitBtn.classList.add('loading');
+            
+            // Simulate form submission (replace with actual form submission)
+            setTimeout(() => {
+                submitBtn.classList.remove('loading');
+                submitBtn.classList.add('success');
+                document.querySelector('.form-status.success').classList.add('show');
+                
+                setTimeout(() => {
+                    document.querySelector('.form-status.success').classList.remove('show');
+                    submitBtn.classList.remove('success');
+                    form.reset();
+                }, 3000);
+            }, 2000);
+        });
+    </script>
+</body>
 </html>

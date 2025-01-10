@@ -2,252 +2,232 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(135deg, #1a0f2e, #30122e, #2e1537);
+    color: white;
     min-height: 100vh;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
 }
 
 .container {
-    width: 100%;
-    max-width: 900px;
-    perspective: 1000px;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
 }
 
-.contact-box {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(20px);
-    border-radius: 30px;
-    padding: 50px;
-    box-shadow: 
-        0 15px 35px rgba(0, 0, 0, 0.2),
-        0 0 20px rgba(255, 255, 255, 0.2),
-        0 0 40px rgba(255, 255, 255, 0.1);
-    transform-style: preserve-3d;
-    animation: float 6s ease-in-out infinite;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0) rotateX(0);
-    }
-    50% {
-        transform: translateY(-10px) rotateX(2deg);
-    }
+/* Contact Info Styles */
+.contact-info {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
 }
 
-h1 {
-    color: #333;
-    font-size: 3em;
-    margin-bottom: 15px;
-    text-align: center;
-    background: linear-gradient(45deg, #ee7752, #e73c7e, #23a6d5);
+.contact-info h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #8b5cf6, #ec4899);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: titleGradient 6s ease infinite;
 }
 
-@keyframes titleGradient {
-    0%, 100% {
-        filter: hue-rotate(0deg);
-    }
-    50% {
-        filter: hue-rotate(60deg);
-    }
+.info-desc {
+    opacity: 0.8;
+    margin-bottom: 2rem;
 }
 
-.tagline {
-    color: #666;
-    text-align: center;
-    margin-bottom: 50px;
-    font-size: 1.2em;
-    letter-spacing: 1px;
-}
-
-.contact-form {
-    margin-bottom: 50px;
-}
-
-.input-group {
-    position: relative;
-    margin-bottom: 35px;
-}
-
-.input-group input,
-.input-group textarea {
-    width: 100%;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 15px;
-    background: rgba(255, 255, 255, 0.9);
-    outline: none;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-}
-
-.input-group textarea {
-    height: 120px;
-    resize: none;
-    border-radius: 20px;
-}
-
-.input-group label {
-    position: absolute;
-    left: 20px;
-    top: 15px;
-    color: #999;
-    transition: all 0.3s ease;
-    pointer-events: none;
-    font-weight: 500;
-}
-
-.input-group input:focus ~ label,
-.input-group textarea:focus ~ label,
-.input-group input:valid ~ label,
-.input-group textarea:valid ~ label {
-    top: -25px;
-    left: 0;
-    font-size: 14px;
-    color: #23a6d5;
-    font-weight: 600;
-}
-
-.input-group input:focus,
-.input-group textarea:focus {
-    box-shadow: 0 5px 20px rgba(35, 166, 213, 0.3);
-    transform: translateY(-2px);
-}
-
-button {
-    width: 100%;
-    padding: 18px;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 300% 300%;
-    animation: gradient 15s ease infinite;
-    border: none;
-    border-radius: 25px;
-    color: white;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-button:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-}
-
-button:active {
-    transform: translateY(-2px);
-}
-
-.contact-info {
-    margin-top: 50px;
-    padding-top: 40px;
-    border-top: 2px solid rgba(255, 255, 255, 0.3);
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+.info-items {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .info-item {
     display: flex;
-    align-items: center;
-    padding: 20px;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.info-item i {
+    font-size: 1.5rem;
+    color: #8b5cf6;
+}
+
+.info-item h3 {
+    margin-bottom: 0.5rem;
+    color: #ec4899;
+}
+
+/* Form Styles */
+.contact-form {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    margin-top: 0;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 1rem;
+    padding-top: 1.5rem;
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
     transition: all 0.3s ease;
 }
 
-.info-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.2);
+.form-group label {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    transform: translateY(-50%);
+    background: rgba(26, 15, 46, 0.8);
+    padding: 0 0.5rem;
 }
 
-.icon {
-    font-size: 28px;
-    margin-right: 20px;
-    color: #23a6d5;
-    text-shadow: 0 0 10px rgba(35, 166, 213, 0.3);
+.form-group.focused label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group textarea:not(:placeholder-shown) + label {
+    top: 0;
+    font-size: 0.75rem;
+    color: #8b5cf6;
 }
 
-.info-item p {
-    color: #444;
-    font-weight: 500;
-    font-size: 1.1em;
+.form-group select {
+    appearance: none;
+    padding-right: 2rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 1em;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+    padding-top: 2rem;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: transparent;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(45deg, #8b5cf6, #ec4899);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 768px) {
-    .contact-box {
-        padding: 30px;
+    .container {
+        padding: 1rem;
+        margin: 1rem auto;
     }
     
-    h1 {
-        font-size: 2.5em;
+    .contact-wrapper {
+        padding: 1.5rem;
     }
-
-    .contact-info {
+    
+    .form-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 1.5rem;
     }
-
-    .info-item {
-        padding: 15px;
+    
+    .contact-form {
+        margin-top: 60px;
+        padding: 1.5rem;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        font-size: 16px;
     }
 }
 
-/* Add smooth scrolling for the whole page */
-html {
-    scroll-behavior: smooth;
+/* Animation for form inputs */
+.focus-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(45deg, #8b5cf6, #ec4899);
+    transition: width 0.3s ease;
 }
 
-/* Add custom scrollbar */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e);
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(-45deg, #23a6d5, #23d5ab);
+.form-group input:focus ~ .focus-border,
+.form-group textarea:focus ~ .focus-border {
+    width: 100%;
 }
 
 nav {
+
+    height: 80px;
     background: rgba(0, 0, 0, 0.8);
     padding: 1rem 5%;
     position: fixed;
@@ -265,17 +245,28 @@ nav {
     font-weight: bold;
 }
 
-.nav-links {
+nav ul {
     display: flex;
     list-style: none;
-    margin: 0;
-    padding: 0;
 }
 
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: #ffd700;
+}
+
+/* Hamburger Menu Styles */
 .hamburger {
     display: none;
     cursor: pointer;
-    padding: 10px;
 }
 
 .hamburger span {
@@ -299,15 +290,21 @@ nav {
         right: -100%;
         height: 100vh;
         width: 100%;
-        background: rgba(0, 0, 0, 0.9);
+        background: rgba(0, 0, 0, 0.95);
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        transition: right 0.3s ease;
+        transition: 0.3s ease;
     }
 
     .nav-links.active {
         right: 0;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
     }
 
     nav ul li {
@@ -325,32 +322,100 @@ nav {
     .hamburger.active span:nth-child(3) {
         transform: rotate(-45deg) translate(7px, -6px);
     }
-
-    nav ul {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-
-    nav ul li {
-        margin: 15px 0;
-    }
-
-    nav ul li a {
-        font-size: 1.2rem;
-    }
 }
 
-nav ul li a {
-    color: #fff;
+/* Social Links */
+.social-links {
+    display: none;
+}
+
+.social-icons {
+    display: none;
+}
+
+.social-icon {
+    display: none;
+}
+
+/* Form Status Messages */
+.form-status {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transform: translateX(150%);
+    transition: transform 0.3s ease;
+}
+
+.form-status.show {
+    transform: translateX(0);
+}
+
+.form-status.success {
+    background: #10B981;
+}
+
+.form-status.error {
+    background: #EF4444;
+}
+
+.form-status i {
+    font-size: 1.5rem;
+}
+
+/* Submit Button Loading State */
+.submit-btn.loading {
+    position: relative;
+    color: transparent;
+}
+
+.submit-btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Privacy Note */
+.form-footer {
+    margin-top: 2rem;
+}
+
+.privacy-note {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+}
+
+.privacy-note a {
+    color: #8b5cf6;
     text-decoration: none;
-    padding: 0.5rem 1rem;
-    margin: 0 0.5rem;
-    transition: color 0.3s;
 }
 
-nav ul li a:hover,
-nav ul li a.active {
-    color: #ffd700;
+.privacy-note a:hover {
+    text-decoration: underline;
+}
+
+/* Date Input Styling */
+input[type="date"] {
+    color-scheme: dark;
+}
+
+.date-label {
+    background: rgba(26, 15, 46, 0.8);
+    padding: 0 0.5rem;
+    transform: translateY(-50%);
 }
