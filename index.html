@@ -337,18 +337,16 @@
                 const isArtist = document.querySelector('.login-option.artist-login').classList.contains('active');
                 
                 // Add user data to Firestore
-                const userDocRef = window.doc(window.db, 'users', userCredential.user.uid);
-                await window.setDoc(userDocRef, {
+                await window.db.collection('users').doc(userCredential.user.uid).set({
                     fullName: fullName,
                     email: email,
                     role: isArtist ? 'artist' : 'user',
-                    createdAt: new Date().toISOString()
+                    createdAt: new Date()
                 });
 
                 document.getElementById('registerModal').style.display = 'none';
                 showNotification('Account created successfully!', 'success');
             } catch (error) {
-                console.error("Registration error:", error);
                 showNotification(error.message, 'error');
             }
         });
@@ -391,28 +389,20 @@
                     if (!userDocSnap.exists()) {
                         // This is a new user, save their data
                         const isArtist = document.querySelector('.login-option.artist-login').classList.contains('active');
-                        const userData = {
+                        await window.setDoc(userDocRef, {
                             fullName: user.displayName,
                             email: user.email,
                             role: isArtist ? 'artist' : 'user',
-                            createdAt: new Date().toISOString(),
-                            photoURL: user.photoURL || null
-                        };
-
-                        try {
-                            await window.setDoc(userDocRef, userData);
-                            console.log("User data saved successfully");
-                        } catch (error) {
-                            console.error("Error saving user data:", error);
-                            throw error;
-                        }
+                            createdAt: new Date(),
+                            photoURL: user.photoURL
+                        });
                     }
                     
                     document.getElementById('loginModal').style.display = 'none';
                     showNotification('Successfully logged in with Google!', 'success');
                 } catch (error) {
                     console.error("Error checking/creating user document:", error);
-                    showNotification('Error saving user data: ' + error.message, 'error');
+                    showNotification('Error saving user data', 'error');
                 }
             } catch (error) {
                 console.error("Google sign in error:", error);
