@@ -68,7 +68,7 @@
 
     <header class="hero">
         <div class="hero-content">
-            <h1>transform Your Events Into <span class="highlight">Unforgettable</span> Experiences</h1>
+            <h1>t Your Events Into <span class="highlight">Unforgettable</span> Experiences</h1>
             <p class="hero-subtitle">Your premier destination for exceptional event planning and performer booking</p>
             <div class="hero-cta">
                 <a href="#services" class="cta-button">Explore Performers</a>
@@ -406,14 +406,28 @@
                 // Get the selected role (user or artist)
                 const isArtist = document.querySelector('.login-option.artist-login').classList.contains('active');
                 
-                // Add user data to Realtime Database using the modular syntax
-                const userRef = window.dbRef(window.database, `Users/${userCredential.user.uid}`);
-                await window.dbSet(userRef, {
+                // Common user data
+                const userData = {
                     fullName: fullName,
                     email: email,
                     role: isArtist ? 'artist' : 'user',
                     createdAt: new Date().toISOString()
-                });
+                };
+
+                // Save to appropriate location based on role
+                if (isArtist) {
+                    // Save in both Artists and Users collections
+                    const artistRef = window.dbRef(window.database, `Artists/${userCredential.user.uid}`);
+                    const userRef = window.dbRef(window.database, `Users/${userCredential.user.uid}`);
+                    await Promise.all([
+                        window.dbSet(artistRef, userData),
+                        window.dbSet(userRef, userData)
+                    ]);
+                } else {
+                    // Save only in Users collection
+                    const userRef = window.dbRef(window.database, `Users/${userCredential.user.uid}`);
+                    await window.dbSet(userRef, userData);
+                }
 
                 document.getElementById('registerModal').style.display = 'none';
                 showNotification('Account created successfully!', 'success');
@@ -430,38 +444,49 @@
                 const user = result.user;
                 
                 try {
-                    // Reference to the user's data in Realtime Database
-                    const userRef = window.dbRef(window.database, `Users/${user.uid}`);
+                    // Get the selected role
+                    const isArtist = document.querySelector('.login-option.artist-login').classList.contains('active');
                     
-                    // Check if user exists
+                    // Reference to user data
+                    const userRef = window.dbRef(window.database, `Users/${user.uid}`);
                     const snapshot = await window.dbGet(userRef);
                     
-                    if (!snapshot.exists()) {
-                        // This is a new user, save their data
-                        const isArtist = document.querySelector('.login-option.artist-login').classList.contains('active');
-                        const userData = {
-                            fullName: user.displayName || '',
-                            email: user.email,
-                            role: isArtist ? 'artist' : 'user',
-                            createdAt: new Date().toISOString(),
-                            photoURL: user.photoURL || null,
-                            lastLogin: new Date().toISOString()
-                        };
+                    const userData = {
+                        fullName: user.displayName || '',
+                        email: user.email,
+                        role: isArtist ? 'artist' : 'user',
+                        createdAt: new Date().toISOString(),
+                        photoURL: user.photoURL || null,
+                        lastLogin: new Date().toISOString()
+                    };
 
-                        // Save the user data using the modular syntax
-                        await window.dbSet(userRef, userData);
+                    if (!snapshot.exists()) {
+                        // New user - save data
+                        if (isArtist) {
+                            // Save in both Artists and Users collections
+                            const artistRef = window.dbRef(window.database, `Artists/${user.uid}`);
+                            await Promise.all([
+                                window.dbSet(artistRef, userData),
+                                window.dbSet(userRef, userData)
+                            ]);
+                        } else {
+                            // Save only in Users collection
+                            await window.dbSet(userRef, userData);
+                        }
                         console.log("New user data saved");
                     } else {
-                        // Update last login for existing user
+                        // Existing user - update data
                         const updates = {
                             lastLogin: new Date().toISOString(),
-                            photoURL: user.photoURL || null // Update photo URL if changed
+                            photoURL: user.photoURL || null
                         };
                         await window.dbSet(userRef, updates);
                         console.log("Updated existing user");
                     }
                     
-                    document.getElementById('loginModal').style.display = 'none';
+                    // Close modal and show success message
+                    const modalId = document.getElementById('loginModal').style.display === 'block' ? 'loginModal' : 'registerModal';
+                    document.getElementById(modalId).style.display = 'none';
                     showNotification('Successfully logged in with Google!', 'success');
                 } catch (error) {
                     console.error("Error in database operations:", error);
