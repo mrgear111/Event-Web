@@ -336,17 +336,19 @@
                 // Get the selected role (user or artist)
                 const isArtist = document.querySelector('.login-option.artist-login').classList.contains('active');
                 
-                // Add user data to Firestore
-                await window.db.collection('users').doc(userCredential.user.uid).set({
+                // Add user data to Firestore using the new syntax
+                const userDocRef = window.doc(window.db, 'users', userCredential.user.uid);
+                await window.setDoc(userDocRef, {
                     fullName: fullName,
                     email: email,
                     role: isArtist ? 'artist' : 'user',
-                    createdAt: new Date()
+                    createdAt: new Date().toISOString()
                 });
 
                 document.getElementById('registerModal').style.display = 'none';
                 showNotification('Account created successfully!', 'success');
             } catch (error) {
+                console.error("Registration error:", error);
                 showNotification(error.message, 'error');
             }
         });
@@ -375,7 +377,7 @@
             }, 3000);
         }
 
-        // Update the handleGoogleSignIn function
+        // Update the Google Sign In function
         async function handleGoogleSignIn() {
             try {
                 const result = await window.signInWithPopup(window.auth, window.provider);
@@ -389,20 +391,34 @@
                     if (!userDocSnap.exists()) {
                         // This is a new user, save their data
                         const isArtist = document.querySelector('.login-option.artist-login').classList.contains('active');
-                        await window.setDoc(userDocRef, {
-                            fullName: user.displayName,
+                        const userData = {
+                            fullName: user.displayName || '',
                             email: user.email,
                             role: isArtist ? 'artist' : 'user',
-                            createdAt: new Date(),
-                            photoURL: user.photoURL
-                        });
+                            createdAt: new Date().toISOString(),
+                            photoURL: user.photoURL || null,
+                            lastLogin: new Date().toISOString()
+                        };
+
+                        try {
+                            await window.setDoc(userDocRef, userData);
+                            console.log("User data saved successfully");
+                        } catch (error) {
+                            console.error("Error in setDoc:", error);
+                            throw error;
+                        }
+                    } else {
+                        // Update last login for existing user
+                        await window.setDoc(userDocRef, {
+                            lastLogin: new Date().toISOString()
+                        }, { merge: true });
                     }
                     
                     document.getElementById('loginModal').style.display = 'none';
                     showNotification('Successfully logged in with Google!', 'success');
                 } catch (error) {
-                    console.error("Error checking/creating user document:", error);
-                    showNotification('Error saving user data', 'error');
+                    console.error("Error in user document operations:", error);
+                    throw error;
                 }
             } catch (error) {
                 console.error("Google sign in error:", error);
