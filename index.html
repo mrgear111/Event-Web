@@ -78,7 +78,7 @@
 
     <header class="hero">
         <div class="hero-content">
-            <h1>tas Your Events Into <span class="highlight">Unforgettable</span> Experiences</h1>
+            <h1>ta Your Events Into <span class="highlight">Unforgettable</span> Experiences</h1>
             <p class="hero-subtitle">Your premier destination for exceptional event planning and performer booking</p>
             <div class="hero-cta">
                 <a href="#services" class="cta-button">Explore Performers</a>
@@ -426,6 +426,7 @@
 
                 document.getElementById('loginModal').style.display = 'none';
                 showNotification('Successfully logged in!', 'success');
+                window.location.href = 'dashboard.html';
             } catch (error) {
                 console.error("Login error:", error);
                 showNotification(error.message, 'error');
@@ -476,6 +477,7 @@
 
                 document.getElementById('registerModal').style.display = 'none';
                 showNotification('Account created successfully!', 'success');
+                window.location.href = 'dashboard.html';
             } catch (error) {
                 console.error("Registration error:", error);
                 showNotification(error.message, 'error');
@@ -533,6 +535,7 @@
                     const modalId = document.getElementById('loginModal').style.display === 'block' ? 'loginModal' : 'registerModal';
                     document.getElementById(modalId).style.display = 'none';
                     showNotification('Successfully logged in with Google!', 'success');
+                    window.location.href = 'dashboard.html';
                 } catch (error) {
                     console.error("Error in database operations:", error);
                     showNotification('Error saving user data: ' + error.message, 'error');

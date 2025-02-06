@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - EventCraft Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Import Firebase SDK (same as index.html) -->
+    <script type="module">
+        // Copy the entire Firebase initialization code from index.html here
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="logo">EventCraft Pro</div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li class="auth-links">
+                <!-- Will be populated by auth state observer -->
+            </li>
+        </ul>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="dashboard-sidebar">
+            <div class="user-info">
+                <img src="" alt="Profile" class="dashboard-profile-pic">
+                <h3 class="dashboard-username">Loading...</h3>
+                <p class="dashboard-role">Loading...</p>
+            </div>
+            <ul class="dashboard-menu">
+                <li class="active"><i class="fas fa-home"></i> Overview</li>
+                <li><i class="fas fa-calendar-alt"></i> My Bookings</li>
+                <li><i class="fas fa-user"></i> Profile</li>
+                <li><i class="fas fa-cog"></i> Settings</li>
+            </ul>
+        </div>
+        <div class="dashboard-content">
+            <h1>Welcome to your Dashboard</h1>
+            <div class="dashboard-stats">
+                <!-- Content will vary based on user role -->
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
