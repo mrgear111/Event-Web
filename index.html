@@ -10,7 +10,7 @@
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getDatabase, ref, set, get, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
 
         // Your web app's Firebase configuration
@@ -28,20 +28,20 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        const db = getFirestore(app);
+        const database = getDatabase(app);
         const analytics = getAnalytics(app);
         const provider = new GoogleAuthProvider();
 
         // Make auth and db available globally
         window.auth = auth;
-        window.db = db;
+        window.database = database;
         window.provider = provider;
         window.signInWithPopup = signInWithPopup;
         window.GoogleAuthProvider = GoogleAuthProvider;
-        window.collection = collection;
-        window.doc = doc;
-        window.setDoc = setDoc;
-        window.getDoc = getDoc;
+        window.dbRef = ref;
+        window.dbSet = set;
+        window.dbGet = get;
+        window.dbUpdate = update;
     </script>
 </head>
 <body>
@@ -67,7 +67,7 @@
 
     <header class="hero">
         <div class="hero-content">
-            <h1>Transform Your Events Into <span class="highlight">Unforgettable</span> Experiences</h1>
+            <h1>Trans Your Events Into <span class="highlight">Unforgettable</span> Experiences</h1>
             <p class="hero-subtitle">Your premier destination for exceptional event planning and performer booking</p>
             <div class="hero-cta">
                 <a href="#services" class="cta-button">Explore Performers</a>
@@ -283,13 +283,38 @@
                 // User is signed in
                 document.querySelectorAll('.auth-links').forEach(el => {
                     el.innerHTML = `
-                        <a href="#" class="user-profile">
-                            <i class="fas fa-user"></i> ${user.email}
-                        </a>
-                        <span class="auth-separator">|</span>
-                        <a href="#" onclick="handleSignOut()">Logout</a>
+                        <div class="user-profile-menu">
+                            <div class="profile-trigger">
+                                <img src="${user.photoURL || 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'}" 
+                                     alt="Profile" 
+                                     class="profile-picture">
+                                <span class="user-name">${user.displayName || user.email}</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="dropdown-menu">
+                                <a href="#" class="dropdown-item">
+                                    <i class="fas fa-user"></i> Profile
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <i class="fas fa-cog"></i> Settings
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" onclick="handleSignOut()" class="dropdown-item">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </a>
+                            </div>
+                        </div>
                     `;
                 });
+
+                // Add click listener for dropdown
+                const profileTrigger = document.querySelector('.profile-trigger');
+                if (profileTrigger) {
+                    profileTrigger.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        document.querySelector('.dropdown-menu').classList.toggle('show');
+                    });
+                }
             } else {
                 // User is signed out
                 document.querySelectorAll('.auth-links').forEach(el => {
@@ -299,6 +324,14 @@
                         <a href="#" onclick="openRegisterModal()">Register</a>
                     `;
                 });
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            const dropdown = document.querySelector('.dropdown-menu');
+            if (dropdown && dropdown.classList.contains('show')) {
+                dropdown.classList.remove('show');
             }
         });
 
@@ -336,9 +369,9 @@
                 // Get the selected role (user or artist)
                 const isArtist = document.querySelector('.login-option.artist-login').classList.contains('active');
                 
-                // Add user data to Firestore using the new syntax
-                const userDocRef = window.doc(window.db, 'users', userCredential.user.uid);
-                await window.setDoc(userDocRef, {
+                // Add user data to Realtime Database
+                const userRef = firebase.database().ref('Users/' + userCredential.user.uid);
+                await userRef.set({
                     fullName: fullName,
                     email: email,
                     role: isArtist ? 'artist' : 'user',
@@ -384,41 +417,34 @@
                 const user = result.user;
                 
                 try {
-                    // Check if this is a new user
-                    const userDocRef = window.doc(window.db, 'users', user.uid);
-                    const userDocSnap = await window.getDoc(userDocRef);
+                    // Reference to the user's data in Realtime Database
+                    const userRef = firebase.database().ref('Users/' + user.uid);
                     
-                    if (!userDocSnap.exists()) {
+                    // Check if user exists
+                    const snapshot = await userRef.once('value');
+                    if (!snapshot.exists()) {
                         // This is a new user, save their data
                         const isArtist = document.querySelector('.login-option.artist-login').classList.contains('active');
-                        const userData = {
+                        await userRef.set({
                             fullName: user.displayName || '',
                             email: user.email,
                             role: isArtist ? 'artist' : 'user',
                             createdAt: new Date().toISOString(),
                             photoURL: user.photoURL || null,
                             lastLogin: new Date().toISOString()
-                        };
-
-                        try {
-                            await window.setDoc(userDocRef, userData);
-                            console.log("User data saved successfully");
-                        } catch (error) {
-                            console.error("Error in setDoc:", error);
-                            throw error;
-                        }
+                        });
                     } else {
                         // Update last login for existing user
-                        await window.setDoc(userDocRef, {
+                        await userRef.update({
                             lastLogin: new Date().toISOString()
-                        }, { merge: true });
+                        });
                     }
                     
                     document.getElementById('loginModal').style.display = 'none';
                     showNotification('Successfully logged in with Google!', 'success');
                 } catch (error) {
-                    console.error("Error in user document operations:", error);
-                    throw error;
+                    console.error("Error in database operations:", error);
+                    showNotification('Error saving user data: ' + error.message, 'error');
                 }
             } catch (error) {
                 console.error("Google sign in error:", error);
