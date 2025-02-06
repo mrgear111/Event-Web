@@ -677,6 +677,7 @@ footer {
 /* User Profile Menu Styles */
 .user-profile-menu {
     position: relative;
+    z-index: 1000;
 }
 
 .profile-trigger {
@@ -713,16 +714,13 @@ footer {
 
 .dropdown-menu {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 10px);
     right: 0;
-    margin-top: 10px;
     background: white;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    padding: 8px 0;
     min-width: 200px;
     display: none;
-    z-index: 1000;
 }
 
 .dropdown-menu.show {

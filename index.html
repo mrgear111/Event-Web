@@ -68,7 +68,7 @@
 
     <header class="hero">
         <div class="hero-content">
-            <h1>Trans Your Events Into <span class="highlight">Unforgettable</span> Experiences</h1>
+            <h1>Transss Your Events Into <span class="highlight">Unforgettable</span> Experiences</h1>
             <p class="hero-subtitle">Your premier destination for exceptional event planning and performer booking</p>
             <div class="hero-cta">
                 <a href="#services" class="cta-button">Explore Performers</a>
@@ -282,13 +282,15 @@
         window.auth.onAuthStateChanged((user) => {
             if (user) {
                 // User is signed in
+                console.log("User is signed in:", user); // Debug log
                 document.querySelectorAll('.auth-links').forEach(el => {
                     el.innerHTML = `
                         <div class="user-profile-menu">
                             <div class="profile-trigger">
                                 <img src="${user.photoURL || 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'}" 
                                      alt="Profile" 
-                                     class="profile-picture">
+                                     class="profile-picture"
+                                     onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'">
                                 <span class="user-name">${user.displayName || user.email}</span>
                                 <i class="fas fa-chevron-down"></i>
                             </div>
@@ -306,18 +308,22 @@
                             </div>
                         </div>
                     `;
-                });
 
-                // Add click listener for dropdown
-                const profileTrigger = document.querySelector('.profile-trigger');
-                if (profileTrigger) {
-                    profileTrigger.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        document.querySelector('.dropdown-menu').classList.toggle('show');
-                    });
-                }
+                    // Add click listener for dropdown
+                    const profileTrigger = el.querySelector('.profile-trigger');
+                    if (profileTrigger) {
+                        profileTrigger.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const dropdown = el.querySelector('.dropdown-menu');
+                            if (dropdown) {
+                                dropdown.classList.toggle('show');
+                            }
+                        });
+                    }
+                });
             } else {
                 // User is signed out
+                console.log("User is signed out"); // Debug log
                 document.querySelectorAll('.auth-links').forEach(el => {
                     el.innerHTML = `
                         <a href="#" onclick="openLoginModal()">Login</a>
@@ -330,10 +336,10 @@
 
         // Close dropdown when clicking outside
         document.addEventListener('click', () => {
-            const dropdown = document.querySelector('.dropdown-menu');
-            if (dropdown && dropdown.classList.contains('show')) {
+            const dropdowns = document.querySelectorAll('.dropdown-menu.show');
+            dropdowns.forEach(dropdown => {
                 dropdown.classList.remove('show');
-            }
+            });
         });
 
         // Handle Login
@@ -392,7 +398,10 @@
             try {
                 await window.auth.signOut();
                 showNotification('Logged out successfully!', 'success');
+                // Force refresh the auth state
+                window.location.reload();
             } catch (error) {
+                console.error("Sign out error:", error);
                 showNotification(error.message, 'error');
             }
         }
