@@ -68,7 +68,7 @@
 
     <header class="hero">
         <div class="hero-content">
-            <h1>Transss Your Events Into <span class="highlight">Unforgettable</span> Experiences</h1>
+            <h1>Tr Your Events Into <span class="highlight">Unforgettable</span> Experiences</h1>
             <p class="hero-subtitle">Your premier destination for exceptional event planning and performer booking</p>
             <div class="hero-cta">
                 <a href="#services" class="cta-button">Explore Performers</a>
@@ -279,68 +279,91 @@
         });
 
         // Firebase Auth State Observer
-        window.auth.onAuthStateChanged((user) => {
-            if (user) {
-                // User is signed in
-                console.log("User is signed in:", user); // Debug log
-                document.querySelectorAll('.auth-links').forEach(el => {
-                    el.innerHTML = `
-                        <div class="user-profile-menu">
-                            <div class="profile-trigger">
-                                <img src="${user.photoURL || 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'}" 
-                                     alt="Profile" 
-                                     class="profile-picture"
-                                     onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'">
-                                <span class="user-name">${user.displayName || user.email}</span>
-                                <i class="fas fa-chevron-down"></i>
+        window.addEventListener('DOMContentLoaded', () => {
+            window.auth.onAuthStateChanged((user) => {
+                if (user) {
+                    // User is signed in
+                    console.log("User is signed in:", user); // Debug log
+                    const authLinks = document.querySelector('.auth-links');
+                    if (authLinks) {
+                        authLinks.innerHTML = `
+                            <div class="user-profile-menu">
+                                <div class="profile-trigger">
+                                    <img src="${user.photoURL || 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'}" 
+                                         alt="Profile" 
+                                         class="profile-picture"
+                                         onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'">
+                                    <span class="user-name">${user.displayName || user.email}</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="dropdown-menu">
+                                    <a href="#" class="dropdown-item">
+                                        <i class="fas fa-user"></i> Profile
+                                    </a>
+                                    <a href="#" class="dropdown-item">
+                                        <i class="fas fa-cog"></i> Settings
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" onclick="handleSignOut(event)" class="dropdown-item">
+                                        <i class="fas fa-sign-out-alt"></i> Logout
+                                    </a>
+                                </div>
                             </div>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">
-                                    <i class="fas fa-user"></i> Profile
-                                </a>
-                                <a href="#" class="dropdown-item">
-                                    <i class="fas fa-cog"></i> Settings
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" onclick="handleSignOut()" class="dropdown-item">
-                                    <i class="fas fa-sign-out-alt"></i> Logout
-                                </a>
-                            </div>
-                        </div>
-                    `;
+                        `;
 
-                    // Add click listener for dropdown
-                    const profileTrigger = el.querySelector('.profile-trigger');
-                    if (profileTrigger) {
-                        profileTrigger.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            const dropdown = el.querySelector('.dropdown-menu');
-                            if (dropdown) {
-                                dropdown.classList.toggle('show');
-                            }
-                        });
+                        // Add click listener for dropdown
+                        const profileTrigger = authLinks.querySelector('.profile-trigger');
+                        if (profileTrigger) {
+                            profileTrigger.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                const dropdown = authLinks.querySelector('.dropdown-menu');
+                                if (dropdown) {
+                                    dropdown.classList.toggle('show');
+                                }
+                            });
+                        }
                     }
-                });
-            } else {
-                // User is signed out
-                console.log("User is signed out"); // Debug log
-                document.querySelectorAll('.auth-links').forEach(el => {
-                    el.innerHTML = `
-                        <a href="#" onclick="openLoginModal()">Login</a>
-                        <span class="auth-separator">|</span>
-                        <a href="#" onclick="openRegisterModal()">Register</a>
-                    `;
-                });
-            }
-        });
+                } else {
+                    // User is signed out
+                    console.log("User is signed out"); // Debug log
+                    const authLinks = document.querySelector('.auth-links');
+                    if (authLinks) {
+                        authLinks.innerHTML = `
+                            <a href="#" onclick="openLoginModal()">Login</a>
+                            <span class="auth-separator">|</span>
+                            <a href="#" onclick="openRegisterModal()">Register</a>
+                        `;
+                    }
+                }
+            });
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', () => {
-            const dropdowns = document.querySelectorAll('.dropdown-menu.show');
-            dropdowns.forEach(dropdown => {
-                dropdown.classList.remove('show');
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.user-profile-menu')) {
+                    const dropdowns = document.querySelectorAll('.dropdown-menu.show');
+                    dropdowns.forEach(dropdown => {
+                        dropdown.classList.remove('show');
+                    });
+                }
             });
         });
+
+        // Update handleSignOut function
+        window.handleSignOut = async function(e) {
+            e.preventDefault();
+            try {
+                await window.auth.signOut();
+                const dropdowns = document.querySelectorAll('.dropdown-menu.show');
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove('show');
+                });
+                showNotification('Logged out successfully!', 'success');
+            } catch (error) {
+                console.error("Sign out error:", error);
+                showNotification(error.message, 'error');
+            }
+        };
 
         // Handle Login
         document.querySelector('.login-form').addEventListener('submit', async (e) => {
@@ -393,33 +416,6 @@
             }
         });
 
-        // Handle Sign Out
-        window.handleSignOut = async function() {
-            try {
-                await window.auth.signOut();
-                showNotification('Logged out successfully!', 'success');
-                // Force refresh the auth state
-                window.location.reload();
-            } catch (error) {
-                console.error("Sign out error:", error);
-                showNotification(error.message, 'error');
-            }
-        }
-
-        // Notification System
-        function showNotification(message, type) {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.textContent = message;
-            
-            document.body.appendChild(notification);
-            
-            // Remove notification after 3 seconds
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }
-
         // Update the Google Sign In function
         async function handleGoogleSignIn() {
             try {
@@ -468,6 +464,20 @@
                 console.error("Google sign in error:", error);
                 showNotification(error.message, 'error');
             }
+        }
+
+        // Notification System
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
         }
     </script>
 

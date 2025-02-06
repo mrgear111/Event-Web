@@ -719,23 +719,24 @@ footer {
     background: white;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 8px 0;
     min-width: 200px;
     display: none;
+    z-index: 1001;
 }
 
 .dropdown-menu.show {
     display: block;
-    animation: dropdownFadeIn 0.2s ease;
 }
 
 .dropdown-item {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 20px;
+    padding: 12px 20px;
     color: #333;
     text-decoration: none;
-    transition: background 0.3s;
+    transition: all 0.3s;
 }
 
 .dropdown-item:hover {
