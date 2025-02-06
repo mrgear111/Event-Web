@@ -67,7 +67,7 @@
 
     <header class="hero">
         <div class="hero-content">
-            <h1>Trans Your Events Into <span class="highlight">Unforgettable</span> Experiences</h1>
+            <h1>Transform Your Events Into <span class="highlight">Unforgettable</span> Experiences</h1>
             <p class="hero-subtitle">Your premier destination for exceptional event planning and performer booking</p>
             <div class="hero-cta">
                 <a href="#services" class="cta-button">Explore Performers</a>
@@ -369,9 +369,9 @@
                 // Get the selected role (user or artist)
                 const isArtist = document.querySelector('.login-option.artist-login').classList.contains('active');
                 
-                // Add user data to Realtime Database
-                const userRef = firebase.database().ref('Users/' + userCredential.user.uid);
-                await userRef.set({
+                // Add user data to Realtime Database using the new syntax
+                const userRef = window.dbRef(window.database, 'Users/' + userCredential.user.uid);
+                await window.dbSet(userRef, {
                     fullName: fullName,
                     email: email,
                     role: isArtist ? 'artist' : 'user',
@@ -418,14 +418,14 @@
                 
                 try {
                     // Reference to the user's data in Realtime Database
-                    const userRef = firebase.database().ref('Users/' + user.uid);
+                    const userRef = window.dbRef(window.database, 'Users/' + user.uid);
                     
                     // Check if user exists
-                    const snapshot = await userRef.once('value');
+                    const snapshot = window.dbGet(userRef);
                     if (!snapshot.exists()) {
                         // This is a new user, save their data
                         const isArtist = document.querySelector('.login-option.artist-login').classList.contains('active');
-                        await userRef.set({
+                        await window.dbSet(userRef, {
                             fullName: user.displayName || '',
                             email: user.email,
                             role: isArtist ? 'artist' : 'user',
@@ -435,7 +435,7 @@
                         });
                     } else {
                         // Update last login for existing user
-                        await userRef.update({
+                        await window.dbUpdate(userRef, {
                             lastLogin: new Date().toISOString()
                         });
                     }
