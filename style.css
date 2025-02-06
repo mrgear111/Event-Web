@@ -716,13 +716,15 @@ footer {
     position: absolute;
     top: calc(100% + 10px);
     right: 0;
-    background: white;
+    background: linear-gradient(135deg, rgba(26, 15, 46, 0.95), rgba(48, 18, 46, 0.95));
     border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     padding: 8px 0;
     min-width: 200px;
     display: none;
     z-index: 1001;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .dropdown-menu.show {
@@ -734,24 +736,25 @@ footer {
     align-items: center;
     gap: 10px;
     padding: 12px 20px;
-    color: #333;
+    color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
     transition: all 0.3s;
 }
 
 .dropdown-item:hover {
-    background: #f5f5f5;
+    background: rgba(139, 92, 246, 0.2);
     color: #8b5cf6;
 }
 
 .dropdown-item i {
     width: 20px;
     text-align: center;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .dropdown-divider {
     height: 1px;
-    background: #eee;
+    background: rgba(255, 255, 255, 0.1);
     margin: 8px 0;
 }
 
