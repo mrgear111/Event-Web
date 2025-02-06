@@ -65,6 +65,9 @@
         </div>
         <ul class="nav-links">
             <li><a href="index.html" class="active">Book Performer</a></li>
+            <li class="dashboard-link" style="display: none;">
+                <a href="dashboard.html">Artist Dashboard</a>
+            </li>
             <li><a href="about.html">About Us</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="Become.html">Become a Performer</a></li>
@@ -78,7 +81,7 @@
 
     <header class="hero">
         <div class="hero-content">
-            <h1>ta Your Events Into <span class="highlight">Unforgettable</span> Experiences</h1>
+            <h1>Ta Your Events Into <span class="highlight">Unforgettable</span> Experiences</h1>
             <p class="hero-subtitle">Your premier destination for exceptional event planning and performer booking</p>
             <div class="hero-cta">
                 <a href="#services" class="cta-button">Explore Performers</a>
@@ -295,12 +298,25 @@
             }
         });
 
-        // Firebase Auth State Observer
+        // Update the Firebase Auth State Observer
         window.addEventListener('DOMContentLoaded', () => {
-            window.auth.onAuthStateChanged((user) => {
+            window.auth.onAuthStateChanged(async (user) => {
                 if (user) {
                     // User is signed in
-                    console.log("User is signed in:", user); // Debug log
+                    console.log("User is signed in:", user);
+                    
+                    // Check user role from database
+                    const userRef = window.dbRef(window.database, `Users/${user.uid}`);
+                    const snapshot = await window.dbGet(userRef);
+                    const userData = snapshot.val();
+                    
+                    // Show/hide dashboard link based on role
+                    const dashboardLink = document.querySelector('.dashboard-link');
+                    if (dashboardLink) {
+                        dashboardLink.style.display = userData?.role === 'artist' ? 'block' : 'none';
+                    }
+                    
+                    // Update auth links
                     const authLinks = document.querySelector('.auth-links');
                     if (authLinks) {
                         authLinks.innerHTML = `
@@ -317,6 +333,11 @@
                                     <a href="#" class="dropdown-item">
                                         <i class="fas fa-user"></i> Profile
                                     </a>
+                                    ${userData?.role === 'artist' ? `
+                                    <a href="dashboard.html" class="dropdown-item">
+                                        <i class="fas fa-chart-line"></i> Artist Dashboard
+                                    </a>
+                                    ` : ''}
                                     <a href="#" class="dropdown-item">
                                         <i class="fas fa-cog"></i> Settings
                                     </a>
@@ -343,7 +364,15 @@
                     }
                 } else {
                     // User is signed out
-                    console.log("User is signed out"); // Debug log
+                    console.log("User is signed out");
+                    
+                    // Hide dashboard link
+                    const dashboardLink = document.querySelector('.dashboard-link');
+                    if (dashboardLink) {
+                        dashboardLink.style.display = 'none';
+                    }
+                    
+                    // Update auth links
                     const authLinks = document.querySelector('.auth-links');
                     if (authLinks) {
                         authLinks.innerHTML = `
@@ -352,16 +381,6 @@
                             <a href="#" onclick="openRegisterModal()">Register</a>
                         `;
                     }
-                }
-            });
-
-            // Close dropdown when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.user-profile-menu')) {
-                    const dropdowns = document.querySelectorAll('.dropdown-menu.show');
-                    dropdowns.forEach(dropdown => {
-                        dropdown.classList.remove('show');
-                    });
                 }
             });
         });
@@ -426,7 +445,6 @@
 
                 document.getElementById('loginModal').style.display = 'none';
                 showNotification('Successfully logged in!', 'success');
-                window.location.href = 'dashboard.html';
             } catch (error) {
                 console.error("Login error:", error);
                 showNotification(error.message, 'error');
@@ -477,7 +495,6 @@
 
                 document.getElementById('registerModal').style.display = 'none';
                 showNotification('Account created successfully!', 'success');
-                window.location.href = 'dashboard.html';
             } catch (error) {
                 console.error("Registration error:", error);
                 showNotification(error.message, 'error');
@@ -535,7 +552,6 @@
                     const modalId = document.getElementById('loginModal').style.display === 'block' ? 'loginModal' : 'registerModal';
                     document.getElementById(modalId).style.display = 'none';
                     showNotification('Successfully logged in with Google!', 'success');
-                    window.location.href = 'dashboard.html';
                 } catch (error) {
                     console.error("Error in database operations:", error);
                     showNotification('Error saving user data: ' + error.message, 'error');
