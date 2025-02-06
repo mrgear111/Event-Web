@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventCraft Pro - Book Performers</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Import Firebase SDK -->
     <script type="module">
         // Import the functions you need from the SDKs you need
@@ -67,7 +68,7 @@
 
     <header class="hero">
         <div class="hero-content">
-            <h1>Transform Your Events Into <span class="highlight">Unforgettable</span> Experiences</h1>
+            <h1>Trans Your Events Into <span class="highlight">Unforgettable</span> Experiences</h1>
             <p class="hero-subtitle">Your premier destination for exceptional event planning and performer booking</p>
             <div class="hero-cta">
                 <a href="#services" class="cta-button">Explore Performers</a>
@@ -369,8 +370,8 @@
                 // Get the selected role (user or artist)
                 const isArtist = document.querySelector('.login-option.artist-login').classList.contains('active');
                 
-                // Add user data to Realtime Database using the new syntax
-                const userRef = window.dbRef(window.database, 'Users/' + userCredential.user.uid);
+                // Add user data to Realtime Database using the modular syntax
+                const userRef = window.dbRef(window.database, `Users/${userCredential.user.uid}`);
                 await window.dbSet(userRef, {
                     fullName: fullName,
                     email: email,
@@ -418,26 +419,34 @@
                 
                 try {
                     // Reference to the user's data in Realtime Database
-                    const userRef = window.dbRef(window.database, 'Users/' + user.uid);
+                    const userRef = window.dbRef(window.database, `Users/${user.uid}`);
                     
                     // Check if user exists
-                    const snapshot = window.dbGet(userRef);
+                    const snapshot = await window.dbGet(userRef);
+                    
                     if (!snapshot.exists()) {
                         // This is a new user, save their data
                         const isArtist = document.querySelector('.login-option.artist-login').classList.contains('active');
-                        await window.dbSet(userRef, {
+                        const userData = {
                             fullName: user.displayName || '',
                             email: user.email,
                             role: isArtist ? 'artist' : 'user',
                             createdAt: new Date().toISOString(),
                             photoURL: user.photoURL || null,
                             lastLogin: new Date().toISOString()
-                        });
+                        };
+
+                        // Save the user data using the modular syntax
+                        await window.dbSet(userRef, userData);
+                        console.log("New user data saved");
                     } else {
                         // Update last login for existing user
-                        await window.dbUpdate(userRef, {
-                            lastLogin: new Date().toISOString()
-                        });
+                        const updates = {
+                            lastLogin: new Date().toISOString(),
+                            photoURL: user.photoURL || null // Update photo URL if changed
+                        };
+                        await window.dbSet(userRef, updates);
+                        console.log("Updated existing user");
                     }
                     
                     document.getElementById('loginModal').style.display = 'none';
